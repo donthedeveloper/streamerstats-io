@@ -5,6 +5,7 @@ import { axios } from 'axios';
 import store from './store';
 
 // import containers
+import AppContainer from './containers/AppContainer';
 
 // import components
 
@@ -14,7 +15,7 @@ export default () => {
   return (
     <Provider store={ store }>
       <Router history={ hashHistory }>
-        <Route path="/" component={ App }>
+        <Route path="/" component={ AppContainer }>
           {/*<Route path=""/>*/}
         </Route>
       </Router>
