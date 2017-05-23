@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/donthedeveloper/template.git"
+    "url": "git+https://github.com/donthedeveloper/streamerstats-node.git"
   },
   "author": "Don Hansen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/donthedeveloper/template/issues"
+    "url": "https://github.com/donthedeveloper/streamerstats-node/issues"
   },
-  "homepage": "https://github.com/donthedeveloper/template#readme",
+  "homepage": "https://github.com/donthedeveloper/streamerstats-node#readme",
   "dependencies": {
     "axios": "^0.15.3",
     "babel-core": "^6.23.1",
