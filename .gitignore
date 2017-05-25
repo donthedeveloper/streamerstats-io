@@ -60,4 +60,5 @@ typings/
 # webpack bundle
 browser/public/js
 
+# vs code config
 .vscode

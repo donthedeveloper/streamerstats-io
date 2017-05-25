@@ -2,6 +2,101 @@
     box-sizing: border-box;
 }
 
+body, 
+html {
+    height: 100%;
+}
+
 body {
-    background-color: red;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+/********** INTRO **********/
+.intro {
+    background-color: #29303a;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
+    padding: 1rem;
+    position: relative;
+}
+
+.intro .title {
+    color: #7ab702;
+    font-size: 2.25rem;
+
+    margin: 0;
+    font-weight: 700;
+
+    position: absolute;
+    top: 1rem;
+
+    text-align: center;
+}
+
+@media (min-width: 720px) {
+    .intro .title {
+        left: 1rem;
+    }
+}
+
+.intro .title span {
+    color: #fff;
+}
+
+.signup {
+    
+}
+
+.signup p {
+    margin-top: 0;
+    color: #fff;
+}
+
+.signup form {
+
+}
+
+.signup input {
+    width: 100%;
+    display: block;
+    padding: 1rem .5rem;
+}
+
+.input-submit {
+    background-color: #7ab702;
+    color: #fff;
+    border: none;
+}
+
+
+
+/********** FEATURES **********/
+.features {
+    padding: 1rem;
+}
+
+.features ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+@media (min-width: 720px) {
+    .features li {
+        display: inline-block;
+        width: 33.333%;
+    }
+}
+
+
+
+/********** GOT YA **********/
+.gotya {
+    background-color: #29303a;
 }
