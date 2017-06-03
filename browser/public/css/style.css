@@ -31,31 +31,18 @@ body {
 .intro .title {
     color: #7ab702;
     font-size: 2.25rem;
-    /*width: 100%;*/
-
     margin: 0;
     font-weight: 700;
-
-    /*position: absolute;
-    top: 2rem;*/
-
     text-align: center;
-
-
 }
-
-@media (min-width: 720px) {
+@media (min-width: 375px) {
     .intro .title {
-        left: 1rem;
+        font-size: 2.75rem;
     }
 }
 
 .intro .title span {
     color: #fff;
-}
-
-.signup {
-    
 }
 
 .signup p {
