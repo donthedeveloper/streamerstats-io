@@ -4,16 +4,18 @@ const AppContainer = (props) => {
   return (
     <div>
       <div className='intro'>
-        <h1 className='title'>Streamer<span>Stats</span></h1>
-        <div className='signup'>
-          <p className='signup-slogan'>Grow Your Twitch Channel.</p>
-          <p>StreamerStats is a web app, containing features and tools that help you grow and manage your Twitch channel.</p>
-          <p>Subscribe to our newsletter to be notified when we launch.</p>
-          <form>
-            <input className='input-email' type='email' placeholder='Email Address' />
-            <input className='input-submit' type='submit' value='Subscribe' />
-          </form>
-        </div>
+        <div className='intro-container'>
+          <h1 className='title'>Streamer<span>Stats</span></h1>
+          <div className='signup'>
+            <p className='signup-slogan'>Grow Your Twitch Channel.</p>
+            <p>StreamerStats is a web app, containing features and tools that help you grow and manage your Twitch channel.</p>
+            <p>Subscribe to our newsletter to be notified when we launch.</p>
+            <form>
+              <input className='input-email' type='email' placeholder='Email Address' />
+              <input className='input-submit' type='submit' value='Subscribe' />
+            </form>
+          </div>
+        </div> 
       </div>
       <div className='features'>
         <ul>
