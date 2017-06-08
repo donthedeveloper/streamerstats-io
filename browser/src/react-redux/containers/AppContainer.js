@@ -20,19 +20,19 @@ const AppContainer = (props) => {
       <div className='features'>
         <ul>
           <li>
-            <i className="fa fa-bar-chart" aria-hidden="true"></i>
-            <p>Statistics with Google Charts</p>
-            {/* img, text */}
+            <i className="fa fa-area-chart fa-2x" aria-hidden="true"></i>
+            <p className="features-title">Statistics with Google Charts</p>
+            <p>Have you ever wondered how long lurkers really stay in your channel? View channel statistics in much more depth.</p>
           </li>
           <li>
-            <i className="fa fa-bar-chart" aria-hidden="true"></i>
-            <p>Moderation tool to help keep track of things</p>
-            {/* img, text */}
+            <i className="fa fa-eercast fa-2x" aria-hidden="true"></i>
+            <p className="features-title">Moderation tools with action logs</p>
+            <p>Mark and see previously problem viewers, as well as users who have a positive impact on your community.</p>
           </li>
           <li>
-            <i className="fa fa-bar-chart" aria-hidden="true"></i>
-            <p>Add your feature</p>
-            {/* img, text */}
+            <i className="fa fa-plus fa-2x features-custom-icon" aria-hidden="true"></i>
+            <p className="features-title">Add your feature</p>
+            <p>If we could build any tool that you needed as a streamer, what would it be?</p>
           </li>
           <li>
             {/* img, text */}

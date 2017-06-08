@@ -57,7 +57,7 @@ body {
     color: #7ab702;
     font-size: 2.25rem;
     margin: 0;
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
 }
 @media (min-width: 375px) {
@@ -152,7 +152,7 @@ body {
 
 /********** FEATURES **********/
 .features {
-    padding: 1rem;
+    padding: 0 2rem;
 }
 
 .features ul {
@@ -160,11 +160,38 @@ body {
     padding-left: 0;
 }
 
+.features li {
+    text-align: center;
+    margin: 4rem auto;
+}
 @media (min-width: 720px) {
     .features li {
         display: inline-block;
         width: 33.333%;
     }
+}
+
+.features i {
+    display: inline-block;
+    /*background-color: #7ab702;*/
+    background-color: #29303a;
+    color: #fff;
+    border-radius: 50%;
+    padding: 1.5rem;
+}
+
+.features .features-custom-icon {
+    background-color: #7ab702;
+}
+
+.features p {
+    font-size: 18px;
+    margin: 0 auto;
+}
+
+.features .features-title {
+    font-weight: 700;
+    margin: 1rem auto .5rem;
 }
 
 
