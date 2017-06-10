@@ -9,11 +9,15 @@ router.post('/', (req, res) => {
             email: req.body.email
         }
     })
-    .then((email) => {
-        res.send(email);
+    .then((emailObj) => {
+        if (emailObj[1]) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(409); // email already taken
+        }
     })
     .catch((err) => {
-        res.send(err);
+        res.sendStatus(400); // invalid email
     })
 });
 

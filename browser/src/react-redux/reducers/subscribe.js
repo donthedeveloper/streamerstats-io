@@ -1,4 +1,7 @@
-const initialState = {};
+const initialState = {
+  subscribed: false, 
+  errorMessage: ""
+};
 
 // --------------------- CONSTANTS ---------------------
 const PLACERHOLDER = 'PLACEHOLDER';
