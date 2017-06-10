@@ -4,6 +4,11 @@ const router = express.Router();
 const {User} = require('../../models');
 
 router.post('/', (req, res) => {
+
+    const chalk = require('chalk');
+    console.log(chalk.yellow('email:'));
+    console.log(req.body.email);
+
     User.findOrCreate({
         where: {
             email: req.body.email

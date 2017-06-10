@@ -18,7 +18,7 @@ const updateErrorMessage = (message) => ({
 
 const updateSubscribedStatus = (status) => ({
   type: UPDATE_SUBSCRIBED_STATUS, 
-  subscribedStatus: true
+  subscribedStatus: status
 })
 
 

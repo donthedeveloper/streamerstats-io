@@ -1,13 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import {subscribeEmail} from '../reducers/subscribe';
+
 class AppContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+  }
+
   handleEmailSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
     const subscribeForm = {
-      email: data.get('input-email')
+      emailAddress: data.get('email')
     };
+
+    console.log(subscribeForm.emailAddress);
+
+    this.props.subscribeEmail(subscribeForm.emailAddress);
   }
 
   render() {
@@ -20,8 +32,8 @@ class AppContainer extends React.Component {
               <p className='signup-slogan'>Grow Your Twitch Channel.</p>
               <p>StreamerStats is a web app, containing features and tools that help you grow and manage your Twitch channel.</p>
               <p>Subscribe to our newsletter to be notified when we launch.</p>
-              <form>
-                <input className='input-email' type='email' placeholder='Email Address' />
+              <form onSubmit={this.handleEmailSubmit}>
+                <input className='input-email' name='email' type='email' placeholder='Email Address' />
                 <input className='input-submit' type='submit' value='Subscribe' />
               </form>
             </div>
@@ -75,11 +87,13 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  
+  subscribed: state.subscribed, 
+  errorMessage: state.errorMessage
 });
 
-const mapDispatchProps = (dispatch) => ({
-
+const mapDispatchToProps = (dispatch) => ({
+  subscribeEmail: (emailAddress) => 
+    dispatch(subscribeEmail(emailAddress))
 });
 
-export default connect(mapStateToProps, mapDispatchProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
