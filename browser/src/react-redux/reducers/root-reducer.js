@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import placeholder from './placeholder';
+import subscribe from './subscribe';
 
 export default combineReducers({
-  placeholder
+  subscribe
 });

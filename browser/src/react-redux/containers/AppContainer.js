@@ -74,11 +74,11 @@ class AppContainer extends React.Component {
   }
 }
 
-mapStateToProps = ({
+const mapStateToProps = (state) => ({
   
 });
 
-mapDispatchProps = ({
+const mapDispatchProps = (dispatch) => ({
 
 });
 
