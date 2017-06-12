@@ -18,11 +18,15 @@ router.post('/', (req, res) => {
         if (emailObj[1]) {
             res.sendStatus(200);
         } else {
-            res.sendStatus(409); // email already taken
+            res.status(409).send({
+                errorMessage: 'email already subscribed'
+            });
         }
     })
     .catch((err) => {
-        res.sendStatus(400); // invalid email
+        res.status(400).send({
+            errorMessage: 'invalid email'
+        });
     })
 });
 

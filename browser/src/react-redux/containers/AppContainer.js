@@ -7,7 +7,18 @@ class AppContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      subscribeFormIsDirty: false
+    }
+
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+    this.cleanSubscribeForm = this.cleanSubscribeForm.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      subscribeFormIsDirty: false
+    });
   }
 
   handleEmailSubmit(e) {
@@ -17,9 +28,13 @@ class AppContainer extends React.Component {
       emailAddress: data.get('email')
     };
 
-    console.log(subscribeForm.emailAddress);
-
     this.props.subscribeEmail(subscribeForm.emailAddress);
+  }
+
+  cleanSubscribeForm() {
+    this.setState({
+      subscribeFormIsDirty: false
+    });
   }
 
   render() {
@@ -32,10 +47,23 @@ class AppContainer extends React.Component {
               <p className='signup-slogan'>Grow Your Twitch Channel.</p>
               <p>StreamerStats is a web app, containing features and tools that help you grow and manage your Twitch channel.</p>
               <p>Subscribe to our newsletter to be notified when we launch.</p>
+            
+              { !this.props.subscribed && 
               <form onSubmit={this.handleEmailSubmit}>
-                <input className='input-email' name='email' type='email' placeholder='Email Address' />
-                <input className='input-submit' type='submit' value='Subscribe' />
+                <input className='input-email' name='email' type='email' placeholder='Email Address' onChange={this.cleanSubscribeForm} />
+                { 
+                  this.state.subscribeFormIsDirty && 
+                  <input disabled className='input-submit--dirty' type='submit' value={ this.props.errorMessage } />
+                }
+                {
+                  !this.state.subscribeFormIsDirty && 
+                  <input className='input-submit' type='submit' value='Subscribe' />
+                }
               </form>
+              }
+              { this.props.subscribed && 
+              <p>Thank you! You have successfully been subscribed and will receive updates towards StreamerStats.</p>
+              }
             </div>
           </div> 
         </div>
@@ -87,8 +115,8 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  subscribed: state.subscribed, 
-  errorMessage: state.errorMessage
+  subscribed: state.subscribe.subscribed, 
+  errorMessage: state.subscribe.errorMessage
 });
 
 const mapDispatchToProps = (dispatch) => ({
