@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {subscribeEmail} from '../reducers/subscribe';
+import {subscribeEmail, updateErrorMessage} from '../reducers/subscribe';
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -12,13 +12,18 @@ class AppContainer extends React.Component {
     }
 
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.cleanSubscribeForm = this.cleanSubscribeForm.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      subscribeFormIsDirty: false
-    });
+    // TODO: incorrectly assumes only prop that will change is error message
+    if (nextProps.errorMessage) { 
+      this.dirtySubscribeForm() 
+    } 
+    else { 
+      this.cleanSubscribeForm() 
+    }
   }
 
   handleEmailSubmit(e) {
@@ -31,9 +36,22 @@ class AppContainer extends React.Component {
     this.props.subscribeEmail(subscribeForm.emailAddress);
   }
 
+  handleInputChange() {
+    console.log('input changed');
+    if (this.state.subscribeFormIsDirty) {
+      this.props.clearErrorMessage();
+    }
+  }
+
   cleanSubscribeForm() {
     this.setState({
       subscribeFormIsDirty: false
+    });
+  }
+
+  dirtySubscribeForm() {
+    this.setState({
+      subscribeFormIsDirty: true
     });
   }
 
@@ -50,7 +68,7 @@ class AppContainer extends React.Component {
             
               { !this.props.subscribed && 
               <form onSubmit={this.handleEmailSubmit}>
-                <input className='input-email' name='email' type='email' placeholder='Email Address' onChange={this.cleanSubscribeForm} />
+                <input className='input-email' name='email' type='email' placeholder='Email Address' onChange={this.handleInputChange} />
                 { 
                   this.state.subscribeFormIsDirty && 
                   <input disabled className='input-submit--dirty' type='submit' value={ this.props.errorMessage } />
@@ -121,7 +139,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   subscribeEmail: (emailAddress) => 
-    dispatch(subscribeEmail(emailAddress))
+    dispatch(subscribeEmail(emailAddress)), 
+  clearErrorMessage: () => 
+    dispatch(updateErrorMessage(""))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

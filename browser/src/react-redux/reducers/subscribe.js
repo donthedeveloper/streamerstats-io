@@ -11,7 +11,7 @@ const UPDATE_SUBSCRIBED_STATUS = 'UPDATE_SUBSCRIBED_STATUS';
 
 
 // --------------------- ACTION CREATERS ---------------------
-const updateErrorMessage = (message) => ({
+export const updateErrorMessage = (message) => ({
   type: UPDATE_ERROR_MESSAGE, 
   errorMessage: message
 });
