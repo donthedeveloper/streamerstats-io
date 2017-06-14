@@ -189,8 +189,17 @@ body {
     padding: 1.5rem;
 }
 
-.features .features-custom-icon {
+/*.features .features-custom-icon {
     background-color: #7ab702;
+}*/
+
+.features-request-button {
+    padding: .75rem 3rem;
+    background-color: #7ab702;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
 }
 
 .features p {
@@ -208,4 +217,27 @@ body {
 /********** GOT YA **********/
 .gotya {
     background-color: #29303a;
+}
+
+
+
+/********** UTILITIES **********/
+.modal-overlay {
+    position: fixed;
+    z-index: 100;
+    background-color: rgba(0,0,0,.75);
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+
+    padding: 2rem;
+}
+.modal-content {
+    padding: 2rem;
+    background-color: #fff;
 }

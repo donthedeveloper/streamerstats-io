@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import Modal from '../components/Modal.jsx';
 import {subscribeEmail, updateErrorMessage} from '../reducers/subscribe';
 
 class AppContainer extends React.Component {
@@ -8,12 +9,16 @@ class AppContainer extends React.Component {
     super(props);
 
     this.state = {
-      subscribeFormIsDirty: false
+      subscribeFormIsDirty: false, 
+      modalIsOpen: false
     }
 
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.cleanSubscribeForm = this.cleanSubscribeForm.bind(this);
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,6 +60,21 @@ class AppContainer extends React.Component {
     });
   }
 
+  openModal() {
+    this.setState({
+      modalIsOpen: true
+    });
+  }
+
+  closeModal(e) {
+    // dont allow clicking of inner children to trigger close
+    if (e.currentTarget === e.target) {
+      this.setState({
+        modalIsOpen: false
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -86,20 +106,24 @@ class AppContainer extends React.Component {
           </div> 
         </div>
         <div className='features'>
+          <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
+            <p>Helloasd l;dfjkaksl;dfjaks dl;fjasasdfasdfs akdjflaskdfjlkasfjasld kfjlaskdfjdl;fj</p>
+          </Modal>
           <ul>
             <li>
-              <i className="fa fa-area-chart fa-2x" aria-hidden="true"></i>
-              <p className="features-title">Statistics with Google Charts</p>
+              <i className='fa fa-area-chart fa-2x' aria-hidden="true"></i>
+              <p className='features-title'>Statistics with Google Charts</p>
               <p>Have you ever wondered how long lurkers really stay in your channel? View channel statistics in much more depth.</p>
             </li>
             <li>
-              <i className="fa fa-eercast fa-2x" aria-hidden="true"></i>
-              <p className="features-title">Moderation tools with action logs</p>
+              <i className='fa fa-eercast fa-2x' aria-hidden="true"></i>
+              <p className='features-title'>Moderation tools with action logs</p>
               <p>Mark and see previously problem viewers, as well as users who have a positive impact on your community.</p>
             </li>
             <li>
-              <i className="fa fa-plus fa-2x features-custom-icon" aria-hidden="true"></i>
-              <p className="features-title">Add your feature</p>
+              {/*<i className='fa fa-plus fa-2x features-custom-icon' aria-hidden="true"></i>
+              <p className="features-title">Add your feature</p>*/}
+              <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
               <p>If we could build any tool that you needed as a streamer, what would it be?</p>
             </li>
             <li>
