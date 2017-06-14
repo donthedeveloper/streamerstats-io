@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import subscribe from './subscribe';
+import subscriber from './subscriber';
 
 export default combineReducers({
-  subscribe
+  subscriber
 });

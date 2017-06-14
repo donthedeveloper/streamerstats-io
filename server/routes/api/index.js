@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const subscribeApi = require('./subscribe');
+const subscriberApi = require('./subscribers');
 
-router.use('/subscribe', subscribeApi);
+router.use('/subscribers', subscriberApi);
 
 module.exports = router;

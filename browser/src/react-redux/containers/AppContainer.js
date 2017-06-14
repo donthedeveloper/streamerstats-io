@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Modal from '../components/Modal.jsx';
-import {subscribeEmail, updateErrorMessage} from '../reducers/subscribe';
+import {addSubscriber, updateErrorMessage} from '../reducers/subscriber';
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class AppContainer extends React.Component {
       emailAddress: data.get('email')
     };
 
-    this.props.subscribeEmail(subscribeForm.emailAddress);
+    this.props.addSubscriber(subscribeForm.emailAddress);
   }
 
   handleInputChange() {
@@ -157,13 +157,13 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  subscribed: state.subscribe.subscribed, 
-  errorMessage: state.subscribe.errorMessage
+  subscribed: state.subscriber.subscribed, 
+  errorMessage: state.subscriber.errorMessage
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  subscribeEmail: (emailAddress) => 
-    dispatch(subscribeEmail(emailAddress)), 
+  addSubscriber: (emailAddress) => 
+    dispatch(addSubscriber(emailAddress)), 
   clearErrorMessage: () => 
     dispatch(updateErrorMessage(""))
 });

@@ -23,9 +23,9 @@ const updateSubscribedStatus = (status) => ({
 
 
 // --------------------- THUNKS ---------------------
-export const subscribeEmail = (email) => 
+export const addSubscriber = (email) => 
   dispatch => 
-    axios.post('api/subscribe', {email})
+    axios.post('api/subscribers', {email})
     .then((statusObj) => {
       if (statusObj.status === 200) {
         const successMessage = 'Thank you! You have successfully been subscribed and will receive updates towards StreamerStats';
@@ -36,12 +36,6 @@ export const subscribeEmail = (email) =>
     })
     .catch((errObj) => {
       let errorMessage = errObj.response.data.errorMessage;
-
-      // if (errObj.response.status === 400) {
-      //   errorMessage = 'This email is invalid. Please provide a valid email address';
-      // } else if (errObj.response.status === 409) {
-      //   errorMessage = 'It looks like this email is already subscribed.';
-      // }
 
       dispatch(updateErrorMessage(errorMessage));
       dispatch(updateSubscribedStatus(false));
