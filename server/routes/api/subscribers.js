@@ -4,10 +4,7 @@ const router = express.Router();
 const {User} = require('../../models');
 
 router.post('/', (req, res) => {
-
     const chalk = require('chalk');
-    console.log(chalk.yellow('email:'));
-    console.log(req.body.email);
 
     User.findOrCreate({
         where: {
@@ -15,17 +12,19 @@ router.post('/', (req, res) => {
         }
     })
     .then((emailObj) => {
+        console.log(chalk.green('Success!'));
         if (emailObj[1]) {
             res.sendStatus(200);
         } else {
             res.status(409).send({
-                errorMessage: 'email already subscribed'
+                errorMessage: 'Email already subscribed.'
             });
         }
     })
     .catch((err) => {
+        console.log(chalk.red('Failure..'));
         res.status(400).send({
-            errorMessage: 'invalid email'
+            errorMessage: err.errors[0].message
         });
     })
 });
