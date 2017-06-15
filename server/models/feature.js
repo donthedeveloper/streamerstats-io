@@ -3,7 +3,18 @@ const {Sequelize, db} = require('./db');
 const Feature = db.define('feature', {
     content: {
         type: Sequelize.TEXT, 
-        allowNull: false
+        validate: {
+            notEmpty: {
+                args: true, 
+                msg: 'Feature is required.'
+            }
+        }
+    }
+}, {
+    hooks: {
+        beforeValidate: function (model, options) {
+            model.content = model.content || '';
+        }
     }
 });
 
