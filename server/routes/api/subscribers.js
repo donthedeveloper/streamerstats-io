@@ -12,7 +12,6 @@ router.post('/', (req, res) => {
         }
     })
     .then((emailObj) => {
-        console.log(chalk.green('Success!'));
         if (emailObj[1]) {
             res.sendStatus(200);
         } else {
@@ -22,7 +21,6 @@ router.post('/', (req, res) => {
         }
     })
     .catch((err) => {
-        console.log(chalk.red('Failure..'));
         res.status(400).send({
             errorMessage: err.errors[0].message
         });
