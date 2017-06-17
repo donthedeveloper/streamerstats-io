@@ -122,11 +122,19 @@ body {
     max-width: 580px;
 }
 
-.signup .input-email {
+.signup input {
     border: none;
-    width: 100%;
-    display: inline-block;
     padding: 1rem .5rem;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.signup .input-email {
+    /*border: none;*/
+    /*width: 100%;*/
+    /*display: inline-block;*/
+    /*padding: 1rem .5rem;*/
 }
 @media (min-width: 500px) {
     .signup .input-email {
@@ -136,11 +144,13 @@ body {
 
 .signup .input-submit, 
 .signup .input-submit--dirty {
-    display: inline-block;
-    border: none;
-    padding: 1rem .5rem;
-    width: 100%;
+    /*display: inline-block;*/
+    /*border: none;*/
+    /*padding: 1rem .5rem;*/
+    /*width: 100%;*/
     color: #fff;
+    font-family: 'Roboto', sans-serif;
+    /*vertical-align: middle;*/
 }
 @media (min-width: 500px) {
     .signup .input-submit, 
@@ -151,6 +161,7 @@ body {
 
 .signup .input-submit {
     background-color: #7ab702;
+    text-transform: uppercase;
 }
 
 .signup .input-submit--dirty {
@@ -241,3 +252,7 @@ body {
     padding: 2rem;
     background-color: #fff;
 }
+
+/*.roboto-button {
+    font-family: 'Roboto', sans-serif;
+}*/

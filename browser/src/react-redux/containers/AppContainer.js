@@ -14,7 +14,7 @@ class AppContainer extends React.Component {
     }
 
     this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleEmailInputChange = this.handleEmailInputChange.bind(this);
     this.cleanSubscribeForm = this.cleanSubscribeForm.bind(this);
 
     this.openModal = this.openModal.bind(this);
@@ -31,6 +31,7 @@ class AppContainer extends React.Component {
     }
   }
 
+  /********** SUBSCRIBE FORM **********/
   handleEmailSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -41,7 +42,7 @@ class AppContainer extends React.Component {
     this.props.addSubscriber(subscribeForm.emailAddress);
   }
 
-  handleInputChange() {
+  handleEmailInputChange() {
     console.log('input changed');
     if (this.state.subscribeFormIsDirty) {
       this.props.clearErrorMessage();
@@ -59,6 +60,20 @@ class AppContainer extends React.Component {
       subscribeFormIsDirty: true
     });
   }
+
+
+  /********** FEATURE FORM **********/
+  handleFeatureSubmit() {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const featureForm = {
+      content: data.get('content')
+    };
+
+    // this.props.addFeature(featureForm.content);
+  }
+
+
 
   openModal() {
     this.setState({
@@ -88,7 +103,7 @@ class AppContainer extends React.Component {
             
               { !this.props.subscribed && 
               <form onSubmit={this.handleEmailSubmit}>
-                <input className='input-email' name='email' type='email' placeholder='Email Address' onChange={this.handleInputChange} />
+                <input className='input-email' name='email' type='email' placeholder='Email Address' onChange={this.handleEmailInputChange} />
                 { 
                   this.state.subscribeFormIsDirty && 
                   <input disabled className='input-submit--dirty' type='submit' value={ this.props.errorMessage } />
@@ -107,7 +122,11 @@ class AppContainer extends React.Component {
         </div>
         <div className='features'>
           <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
-            <p>Helloasd l;dfjkaksl;dfjaks dl;fjasasdfasdfs akdjflaskdfjlkasfjasld kfjlaskdfjdl;fj</p>
+            <form>
+              <label htmlFor='feature-content'>Feature:</label>
+              <textarea name='content' id='feature-content'></textarea>
+              <input type='submit' />
+            </form>
           </Modal>
           <ul>
             <li>
