@@ -9,9 +9,9 @@ const ADD_FEATURE = 'ADD_FEATURE';
 
 
 // --------------------- ACTION CREATERS ---------------------
-export const addFeature = (feature) => ({
+export const addFeature = (featureObj) => ({
   type: ADD_FEATURE, 
-  feature: feature
+  feature: featureObj
 });
 
 

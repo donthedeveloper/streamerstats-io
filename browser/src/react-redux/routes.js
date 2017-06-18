@@ -10,7 +10,7 @@ import AppContainer from './containers/AppContainer';
 // import components
 
 // import actions
-import {addFeature} from 'reducers/feature';
+import { addFeature } from './reducers/feature';
 
 // on enters
 const onAppEnter = () => {
@@ -24,9 +24,11 @@ const onAppEnter = () => {
       contentText: 'Mark and see previously problem viewers, as well as users who have a positive impact on your community.', 
       faIconClass: 'fa-eercast'
     }
-  ]
+  ];
 
-  store.dispatch(addFeature(feature));
+  featuresData.forEach((featureObj) => {
+    store.dispatch(addFeature(featureObj));
+  });
 }
 
 export default () => {
