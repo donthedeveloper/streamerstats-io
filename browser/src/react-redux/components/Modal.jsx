@@ -7,8 +7,9 @@ const Modal = (props) => {
             <div className='modal-overlay' onClick={props.closeModal}>
                 <div className='modal-content'>
                     {props.children}
+                    <i className="fa fa-times modal-close" aria-hidden="true" onClick={ props.closeModal }></i>
                 </div>
-            </div>
+           </div>
         );
     } else {
         return null;

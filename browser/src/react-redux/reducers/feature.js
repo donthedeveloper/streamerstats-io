@@ -5,28 +5,32 @@ const initialState = {
 };
 
 // --------------------- CONSTANTS ---------------------
-const ADD_FEATURE = 'ADD_FEATURE';
+const ADD_FEATURE_OBJ = 'ADD_FEATURE_OBJ';
 
 
 // --------------------- ACTION CREATERS ---------------------
-export const addFeature = (featureObj) => ({
-  type: ADD_FEATURE, 
+export const addFeatureObj = (featureObj) => ({
+  type: ADD_FEATURE_OBJ, 
   feature: featureObj
 });
 
 
 // --------------------- THUNKS ---------------------
-// export const addSubscriber = (email) => 
-//   dispatch => 
-//     axios.post('api/subscribers', {email})
-//     .then((statusObj) => {
-//       if (statusObj.status === 200) {
-//         const successMessage = 'Thank you! You have successfully been subscribed and will receive updates towards StreamerStats';
-        
-//         dispatch(updateSubscribedStatus(true));
-//         dispatch(updateErrorMessage(""));
-//       }
-//     })
+// TODO: FINISH
+export const addFeature = (content) => 
+  dispatch => 
+    axios.post('api/features', {content})
+    .then((statusObj) => {
+      if (statusObj.status === 200) {
+        const featureObj = {
+          headerText: 'Requested Feature', 
+          contentText: content, 
+          faIconClass: 'fa-taxi'
+        }
+
+        dispatch(addFeatureObj(feature));
+      }
+    });
 //     .catch((errObj) => {
 //       let errorMessage = errObj.response.data.errorMessage;
 
@@ -40,8 +44,8 @@ export default (state=initialState, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case ADD_FEATURE:
-      newState.features = [action.feature, [...newState.features]];
+    case ADD_FEATURE_OBJ:
+      newState.features = [action.feature, ...newState.features];
       break;
     default:
       return state;

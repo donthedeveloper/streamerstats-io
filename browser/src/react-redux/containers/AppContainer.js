@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Modal from '../components/Modal.jsx';
+
 import {addSubscriber, updateErrorMessage} from '../reducers/subscriber';
 
 class AppContainer extends React.Component {
@@ -63,18 +64,20 @@ class AppContainer extends React.Component {
 
 
   /********** FEATURE FORM **********/
-  handleFeatureSubmit() {
+  handleFeatureSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
     const featureForm = {
       content: data.get('content')
     };
 
-    // this.props.addFeature(featureForm.content);
+    console.log('feature form:', featureForm);
+
+    this.props.addFeature(featureForm.content);
   }
 
 
-
+  /********** MODAL **********/
   openModal() {
     this.setState({
       modalIsOpen: true
@@ -122,38 +125,28 @@ class AppContainer extends React.Component {
         </div>
         <div className='features'>
           <Modal isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
-            <form>
+            <form onSubmit={ this.handleFeatureSubmit }>
               <label htmlFor='feature-content'>Feature:</label>
               <textarea name='content' id='feature-content'></textarea>
               <input type='submit' />
             </form>
           </Modal>
+          <div>
+            <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
+            <p>If we could build any tool that you needed as a streamer, what would it be?</p>
+          </div>
           <ul>
-            <li>
-              <i className='fa fa-area-chart fa-2x' aria-hidden="true"></i>
-              <p className='features-title'>Statistics with Google Charts</p>
-              <p>Have you ever wondered how long lurkers really stay in your channel? View channel statistics in much more depth.</p>
-            </li>
-            <li>
-              <i className='fa fa-eercast fa-2x' aria-hidden="true"></i>
-              <p className='features-title'>Moderation tools with action logs</p>
-              <p>Mark and see previously problem viewers, as well as users who have a positive impact on your community.</p>
-            </li>
-            <li>
-              {/*<i className='fa fa-plus fa-2x features-custom-icon' aria-hidden="true"></i>
-              <p className="features-title">Add your feature</p>*/}
-              <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
-              <p>If we could build any tool that you needed as a streamer, what would it be?</p>
-            </li>
-            <li>
-              {/* img, text */}
-            </li>
-            <li>
-              {/* img, text */}
-            </li>
-            <li>
-              {/* img, text */}
-            </li>
+            {
+              this.props.features.map((feature, counter) => {
+                return (
+                  <li className='features-item--default' key={ counter }>
+                    <i className={`fa ${feature.faIconClass} fa-2x`} aria-hidden='true'></i>
+                    <p className='features-title'>{ feature.headerText }</p>
+                    <p>{ feature.contentText }</p>
+                  </li>
+                );
+              })
+            }
           </ul>
         </div>
         <div className='gotya'>
@@ -177,14 +170,17 @@ class AppContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   subscribed: state.subscriber.subscribed, 
-  errorMessage: state.subscriber.errorMessage
+  errorMessage: state.subscriber.errorMessage, 
+  features: state.feature.features
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addSubscriber: (emailAddress) => 
     dispatch(addSubscriber(emailAddress)), 
   clearErrorMessage: () => 
-    dispatch(updateErrorMessage(""))
+    dispatch(updateErrorMessage("")), 
+  addFeature: (content) => 
+    dispatch(addFeature(content))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

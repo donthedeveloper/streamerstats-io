@@ -10,7 +10,7 @@ import AppContainer from './containers/AppContainer';
 // import components
 
 // import actions
-import { addFeature } from './reducers/feature';
+import { addFeatureObj } from './reducers/feature';
 
 // on enters
 const onAppEnter = () => {
@@ -27,7 +27,7 @@ const onAppEnter = () => {
   ];
 
   featuresData.forEach((featureObj) => {
-    store.dispatch(addFeature(featureObj));
+    store.dispatch(addFeatureObj(featureObj));
   });
 }
 

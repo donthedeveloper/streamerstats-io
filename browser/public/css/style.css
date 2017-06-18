@@ -191,7 +191,7 @@ body {
     }
 }
 
-.features i {
+.features-item i {
     display: inline-block;
     /*background-color: #7ab702;*/
     background-color: #29303a;
@@ -251,6 +251,15 @@ body {
 .modal-content {
     padding: 2rem;
     background-color: #fff;
+
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
 }
 
 /*.roboto-button {
