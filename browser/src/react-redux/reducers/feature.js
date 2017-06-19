@@ -28,7 +28,7 @@ export const addFeature = (content) =>
           faIconClass: 'fa-taxi'
         }
 
-        dispatch(addFeatureObj(feature));
+        dispatch(addFeatureObj(featureObj));
       }
     });
 //     .catch((errObj) => {

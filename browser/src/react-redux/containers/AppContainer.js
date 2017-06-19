@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Modal from '../components/Modal.jsx';
 
 import {addSubscriber, updateErrorMessage} from '../reducers/subscriber';
+import {addFeature} from '../reducers/feature';
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -18,8 +19,11 @@ class AppContainer extends React.Component {
     this.handleEmailInputChange = this.handleEmailInputChange.bind(this);
     this.cleanSubscribeForm = this.cleanSubscribeForm.bind(this);
 
+    this.handleFeatureSubmit = this.handleFeatureSubmit.bind(this);
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.forceCloseModal = this.forceCloseModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,6 +33,10 @@ class AppContainer extends React.Component {
     } 
     else { 
       this.cleanSubscribeForm() 
+    }
+
+    if (nextProps.features.length > this.props.features.length) {
+      this.forceCloseModal();
     }
   }
 
@@ -44,7 +52,6 @@ class AppContainer extends React.Component {
   }
 
   handleEmailInputChange() {
-    console.log('input changed');
     if (this.state.subscribeFormIsDirty) {
       this.props.clearErrorMessage();
     }
@@ -71,8 +78,6 @@ class AppContainer extends React.Component {
       content: data.get('content')
     };
 
-    console.log('feature form:', featureForm);
-
     this.props.addFeature(featureForm.content);
   }
 
@@ -91,6 +96,13 @@ class AppContainer extends React.Component {
         modalIsOpen: false
       });
     }
+  }
+
+  // TODO: closeModal needs to be simpler. Separate checks from the actual action.
+  forceCloseModal() {
+    this.setState({
+      modalIsOpen: false
+    })
   }
 
   render() {
@@ -131,10 +143,12 @@ class AppContainer extends React.Component {
               <input type='submit' />
             </form>
           </Modal>
-          <div>
-            <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
+          <div className='features-request'>
+            <h2>Request A Feature</h2>
             <p>If we could build any tool that you needed as a streamer, what would it be?</p>
+            <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
           </div>
+          <hr />
           <ul>
             {
               this.props.features.map((feature, counter) => {

@@ -172,10 +172,16 @@ body {
 
 /********** FEATURES **********/
 .features {
-    padding: 0 2rem;
+    padding: 2rem;
+}
+
+.features p {
+    font-size: 18px;
+    margin: 0 auto;
 }
 
 .features ul {
+    margin-top: 0;
     list-style-type: none;
     padding-left: 0;
 }
@@ -189,6 +195,14 @@ body {
         display: inline-block;
         width: 33.333%;
     }
+}
+
+.features-request {
+    padding: 1rem 0;
+}
+
+.features-request h2 {
+    margin-top: 0;
 }
 
 .features-item i {
@@ -205,17 +219,17 @@ body {
 }*/
 
 .features-request-button {
-    padding: .75rem 3rem;
+    padding: 1rem 3rem;
     background-color: #7ab702;
-    margin-bottom: 1rem;
-    border-radius: 5px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /*border-radius: 5px;*/
+    width: 100%;
     border: 1px solid black;
     color: white;
-}
 
-.features p {
-    font-size: 18px;
-    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
 }
 
 .features .features-title {
