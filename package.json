@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "webpack": "webpack -w", 
+    "webpack": "webpack -w",
     "seed": "node server/models/seed.js"
   },
   "repository": {

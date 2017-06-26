@@ -25,7 +25,8 @@ export const addFeature = (content) =>
         const featureObj = {
           headerText: 'Requested Feature', 
           contentText: content, 
-          faIconClass: 'fa-taxi'
+          faIconClass: 'fa-taxi', 
+          userSubmitted: true
         }
 
         dispatch(addFeatureObj(featureObj));
@@ -45,7 +46,7 @@ export default (state=initialState, action) => {
 
   switch (action.type) {
     case ADD_FEATURE_OBJ:
-      newState.features = [action.feature, ...newState.features];
+      newState.features = [...newState.features, action.feature];
       break;
     default:
       return state;

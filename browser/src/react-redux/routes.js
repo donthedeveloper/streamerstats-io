@@ -18,11 +18,13 @@ const onAppEnter = () => {
     {
       headerText: 'Statistics with Google Charts', 
       contentText: 'Have you ever wondered how long lurkers really stay in your channel? View channel statistics in much more depth.', 
-      faIconClass: 'fa-area-chart'
+      faIconClass: 'fa-area-chart', 
+      isUserSubmitted: false
     }, {
       headerText: 'Moderation tools with action logs', 
       contentText: 'Mark and see previously problem viewers, as well as users who have a positive impact on your community.', 
-      faIconClass: 'fa-eercast'
+      faIconClass: 'fa-eercast', 
+      isUserSubmitted: false
     }
   ];
 

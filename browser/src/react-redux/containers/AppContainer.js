@@ -143,25 +143,29 @@ class AppContainer extends React.Component {
               <input type='submit' />
             </form>
           </Modal>
-          <div className='features-request'>
-            <h2>Request A Feature</h2>
-            <p>If we could build any tool that you needed as a streamer, what would it be?</p>
-            <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
-          </div>
-          <hr />
+
+          
           <ul>
             {
               this.props.features.map((feature, counter) => {
+                const cssClass = (feature.userSubmitted) ? 'features-item--userSubmitted' : 'features-item';
+
                 return (
-                  <li className='features-item--default' key={ counter }>
+                  <li className={cssClass} key={counter}>
                     <i className={`fa ${feature.faIconClass} fa-2x`} aria-hidden='true'></i>
-                    <p className='features-title'>{ feature.headerText }</p>
-                    <p>{ feature.contentText }</p>
+                    <p className='features-title'>{feature.headerText}</p>
+                    <p>{feature.contentText}</p>
                   </li>
                 );
               })
             }
           </ul>
+          <hr />
+          <div className='features-request'>
+            <h2>Request A Feature</h2>
+            <p>If we could build any tool that you needed as a streamer, what would it be?</p>
+            <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
+          </div>
         </div>
         <div className='gotya'>
           <div>
