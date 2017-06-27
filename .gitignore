@@ -62,3 +62,6 @@ browser/public/js
 
 # vs code config
 .vscode
+
+#mac
+.DS_Store
