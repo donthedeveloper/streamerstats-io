@@ -145,7 +145,7 @@ class AppContainer extends React.Component {
           </Modal>
 
           
-          <ul>
+          <ul className='features-list'>
             {
               this.props.features.map((feature, counter) => {
                 const cssClass = (feature.userSubmitted) ? 'features-item--userSubmitted' : 'features-item';

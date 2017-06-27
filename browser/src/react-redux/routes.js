@@ -16,7 +16,7 @@ import { addFeatureObj } from './reducers/feature';
 const onAppEnter = () => {
   const featuresData =  [
     {
-      headerText: 'Statistics with Google Charts', 
+      headerText: 'Unique Channel Statistics', 
       contentText: 'Have you ever wondered how long lurkers really stay in your channel? View channel statistics in much more depth.', 
       faIconClass: 'fa-area-chart', 
       isUserSubmitted: false
