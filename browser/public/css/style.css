@@ -144,13 +144,8 @@ body {
 
 .signup .input-submit, 
 .signup .input-submit--dirty {
-    /*display: inline-block;*/
-    /*border: none;*/
-    /*padding: 1rem .5rem;*/
-    /*width: 100%;*/
     color: #fff;
     font-family: 'Roboto', sans-serif;
-    /*vertical-align: middle;*/
 }
 @media (min-width: 500px) {
     .signup .input-submit, 
@@ -175,16 +170,22 @@ body {
     padding: 4rem 2rem;
 }
 
+.features p {
+    max-width: 350px;
+}
+
 .features-list {
     margin: 0;
     list-style-type: none;
     padding-left: 0;
+    text-align: center;
 }
 
 .features-item p, 
 .features-item--userSubmitted p {
     font-size: 18px;
     margin: 0 auto;
+    line-height: 25px;
 }
 
 .features-item, 
@@ -212,7 +213,10 @@ body {
 }
 
 .features-request p {
-    margin-bottom: 2rem;
+    /*margin-bottom: 2rem;*/
+    margin: 0 auto 2rem;
+    line-height: 20px;
+    /*display: inline-block;*/
 }
 
 .features-item i, 
@@ -245,6 +249,58 @@ body {
     text-transform: uppercase;
 }
 
+.features-request-form fieldset {
+    border-radius: 5px;
+    padding: 0;
+    position: relative;
+    margin-bottom: 1rem;
+    border-radius: 2px;
+}
+
+.features-request-form legend {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 0 8px;
+    /*display: inline-block;*/
+    background-color: #fff;
+}
+
+.features-request-form textarea, 
+.features-request-form label {
+    display: block;
+}
+
+.features-request-form textarea {
+    width: 100%;
+    margin: 0;
+    height: 150px;
+    border: none;
+}
+
+.features-request-form label {
+    padding: .25rem 1rem;
+    background-color: lightslategray;
+
+}
+
+.features-request-form input[type="submit"] {
+    padding: 1rem 3rem;
+    background-color: #7ab702;
+    /*margin-top: 2rem;*/
+    width: 100%;
+    max-width: 250px;
+
+    border: 1px solid black;
+    border-radius: 2px;
+
+    color: white;
+
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+
+/*TODO: Rename*/
 .features .features-title {
     font-weight: 700;
     margin: 1rem auto .5rem;
@@ -273,7 +329,7 @@ body {
     top: 0;
     left: 0;
 
-    padding: 2rem;
+    /*padding: 2rem;*/
 }
 .modal-content {
     padding: 2rem;
@@ -286,7 +342,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 1rem;
+    padding: .5rem;
 }
 
 /*.roboto-button {
