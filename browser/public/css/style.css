@@ -199,7 +199,7 @@ body {
     .features-item--userSubmitted {
         display: inline-block;
         padding: 0 2rem 4rem;
-        max-width: 33.333%;
+        width: 33.333%;
     }
 }
 
@@ -249,6 +249,10 @@ body {
     text-transform: uppercase;
 }
 
+.features-request-form {
+    margin-bottom: 0;
+}
+
 .features-request-form fieldset {
     border-radius: 5px;
     padding: 0;
@@ -276,12 +280,18 @@ body {
     margin: 0;
     height: 150px;
     border: none;
+    padding: 1rem;
+}
+.features-request-form textarea:focus {
+    outline: none; /*or outline-color:#FFFFFF; if the first doesn't work*/
+    border:1px solid navy;
+    -webkit-box-shadow: 0px 0px 4px 0px navy;
+    box-shadow: 0px 0px 4px 0px navy;
 }
 
 .features-request-form label {
     padding: .25rem 1rem;
-    background-color: lightslategray;
-
+    background-color: lightgray;
 }
 
 .features-request-form input[type="submit"] {
@@ -289,7 +299,7 @@ body {
     background-color: #7ab702;
     /*margin-top: 2rem;*/
     width: 100%;
-    max-width: 250px;
+    /*max-width: 250px;*/
 
     border: 1px solid black;
     border-radius: 2px;
@@ -332,10 +342,17 @@ body {
     /*padding: 2rem;*/
 }
 .modal-content {
+    border-radius: 2px;
     padding: 2rem;
     background-color: #fff;
-
+    width: 90%;
     position: relative;
+    max-width: 720px;
+}
+@media (min-width: 720px) {
+    .modal-content {
+        padding: 3rem;
+    }
 }
 
 .modal-close {
@@ -343,6 +360,13 @@ body {
     top: 0;
     right: 0;
     padding: .5rem;
+}
+@media(min-width: 720px) {
+    .modal-close {
+        top: 5px;
+        right: 5px;
+        font-size: 24px;
+    }
 }
 
 /*.roboto-button {

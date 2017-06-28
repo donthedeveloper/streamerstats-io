@@ -140,14 +140,12 @@ class AppContainer extends React.Component {
             <form className='features-request-form' onSubmit={ this.handleFeatureSubmit }>
               <fieldset>
                 <legend>Feature Request</legend>
-                <textarea name='content' id='feature-content'></textarea>
-                <label htmlFor='feature-content'>What feature would you like to see?</label>
+                <textarea name='content' id='feature-content' autoFocus='autofocus'></textarea>
+                {/*<label htmlFor='feature-content'>What feature would you like to see?</label>*/}
               </fieldset>
-              <input type='submit' />
+              <input type='submit' value='Submit Feature' />
             </form>
           </Modal>
-
-          
           <ul className='features-list'>
             {
               this.props.features.map((feature, counter) => {
