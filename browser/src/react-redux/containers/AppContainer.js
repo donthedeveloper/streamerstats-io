@@ -168,19 +168,23 @@ class AppContainer extends React.Component {
             <button className='features-request-button' onClick={this.openModal}>Add your feature</button>
           </div>
         </div>
-        <div className='gotya'>
-          <div>
-            <p>Hello!</p>
-            <form>
-              <input type='email' />
-              <input type='submit' value='Submit' />
-            </form>
-          </div>
-          <ul>
-            {/*<li><a href='' target='_blank'><icon></li>
-            <li><a href='' target='_blank'><icon></li>
-            <li><a href='' target='_blank'><icon></li>*/}
+        <div className='footer'>
+          <ul className='social-list'>
+            <li>
+              <i className='fa fa-envelope fa-2x' aria-hidden='true'></i>
+              Contact
+            </li>
+            <li>
+              <i className='fa fa-twitter fa-2x' aria-hidden='true'></i>
+              Share<span> on Twitter</span>
+            </li>
+            <li>
+              <i className='fa fa-facebook fa-2x' aria-hidden='true'></i>
+              Share<span> on Facebook</span>
+            </li>
           </ul>
+          <p>Watch the app being built live at <a target='_blank' href='http://twitch.tv/donthedeveloper'>twitch.tv/donthedeveloper</a>.</p>
+          <p>Take a look at our privacy policy to see how we protect your information.</p>
         </div>
       </div>
     );
