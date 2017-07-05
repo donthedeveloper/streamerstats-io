@@ -138,7 +138,7 @@ body {
 }
 @media (min-width: 500px) {
     .signup .input-email {
-        width: 75%;
+        width: 65%;
     }
 }
 
@@ -150,7 +150,7 @@ body {
 @media (min-width: 500px) {
     .signup .input-submit, 
     .signup .input-submit--dirty {
-        width: 25%;
+        width: 35%;
     }
 }
 
@@ -327,6 +327,7 @@ body {
     list-style-type: none;
     padding-left: 0;
     color: #fff;
+    margin: 0;
 }
 @media (min-width: 720px) {
     .footer .social-list {
@@ -345,9 +346,14 @@ body {
     }
 }
 
-.footer .social-list li i {
+.footer .social-list i {
     padding-right: 10px;
     vertical-align: middle;
+}
+
+.footer .social-list a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .footer .social-list li:nth-child(1) {
@@ -393,6 +399,25 @@ body {
 @media (min-width: 720px) and (max-width: 870px) {
     .footer .social-list li:nth-child(3) span {
         display: none;
+    }
+}
+
+.footer .copyright-paragraphs {
+    /*padding-left: 2rem;*/
+    /*padding-right: 2rem;*/
+    padding: 1rem 2rem;
+}
+
+.footer .copyright-paragraphs p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    line-height: 20px;
+}
+@media (min-width: 720px) {
+    .footer .copyright-paragraphs p {
+        margin-top: .5rem;
+        margin-bottom: .5rem;
     }
 }
 

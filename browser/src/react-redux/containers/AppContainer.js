@@ -171,20 +171,28 @@ class AppContainer extends React.Component {
         <div className='footer'>
           <ul className='social-list'>
             <li>
-              <i className='fa fa-envelope fa-2x' aria-hidden='true'></i>
-              Contact
+              <a href='mailto:don@donthedeveloper.tv'>
+                <i className='fa fa-envelope fa-2x' aria-hidden='true'></i>
+                Contact
+              </a>
             </li>
             <li>
-              <i className='fa fa-twitter fa-2x' aria-hidden='true'></i>
-              Share<span> on Twitter</span>
+              <a target='_blank' href='https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20Twitch%20web%20app%20that%20provides,%20streamers,%20tools%20to%20help%20them%20grow.&url=http%3A%2F%2Fstreamerstats.io%2F'>
+                <i className='fa fa-twitter fa-2x' aria-hidden='true'></i>
+                Share<span> on Twitter</span>
+              </a>
             </li>
             <li>
-              <i className='fa fa-facebook fa-2x' aria-hidden='true'></i>
-              Share<span> on Facebook</span>
+              <a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A//www.streamerstats.io'>
+                <i className='fa fa-facebook fa-2x' aria-hidden='true'></i>
+                Share<span> on Facebook</span>
+              </a>
             </li>
           </ul>
-          <p>Watch the app being built live at <a target='_blank' href='http://twitch.tv/donthedeveloper'>twitch.tv/donthedeveloper</a>.</p>
-          <p>Take a look at our privacy policy to see how we protect your information.</p>
+          <div className='copyright-paragraphs'>
+            <p>Watch the app being built live at <a target='_blank' href='https://www.twitch.tv/donthedeveloper'>twitch.tv/donthedeveloper</a>.</p>
+            <p>Take a look at our <a href=''>privacy policy</a> to see how we protect your information.</p>
+          </div>
         </div>
       </div>
     );
