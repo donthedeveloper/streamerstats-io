@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
+    "postinstall": "webpack",
     "dev": "nodemon app.js && webpack -w",
     "webpack": "webpack",
     "webpack-watch": "webpack -w",
