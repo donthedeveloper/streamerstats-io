@@ -19,6 +19,6 @@ app.use('/public', express.static('browser/public'));
 
 app.use('/', router);
 
-app.listen(3000, function() {
-  console.log( chalk.blue('App is listening on port 3000.') );
+app.listen(process.env.PORT || 3000, function() {
+  console.log( chalk.blue('App is listening on port ' + process.env.PORT || 3000) );
 });
