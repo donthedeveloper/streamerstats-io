@@ -7,8 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "nodemon app.js",
-    "webpack": "webpack -w",
+    "start": "node app.js",
+    "dev": "nodemon app.js && webpack -w",
+    "webpack": "webpack",
+    "webpack-watch": "webpack -w",
     "seed": "node server/models/seed.js"
   },
   "repository": {
