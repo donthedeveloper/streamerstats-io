@@ -25,7 +25,7 @@ export const addFeature = (content) =>
         const featureObj = {
           headerText: 'Requested Feature', 
           contentText: content, 
-          faIconClass: 'fa-taxi', 
+          faIconClass: 'fa-upload', 
           userSubmitted: true
         }
 
