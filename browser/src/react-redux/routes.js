@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import { axios } from 'axios';
 import store from './store';
@@ -36,7 +36,7 @@ const onAppEnter = () => {
 export default () => {
   return (
     <Provider store={ store }>
-      <Router history={ hashHistory }>
+      <Router history={ browserHistory }>
         <Route path="/" component={ AppContainer } onEnter={onAppEnter}>
           {/*<Route path=""/>*/}
         </Route>
