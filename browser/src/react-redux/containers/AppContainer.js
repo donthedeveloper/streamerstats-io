@@ -191,7 +191,7 @@ class AppContainer extends React.Component {
           </ul>
           <div className='copyright-paragraphs'>
             <p>Watch the app being built live at <a target='_blank' href='https://www.twitch.tv/donthedeveloper'>twitch.tv/donthedeveloper</a>.</p>
-            <p>Take a look at our <a href=''>privacy policy</a> to see how we protect your information.</p>
+            <p>Take a look at our <a href='https://docs.google.com/a/donthedeveloper.tv/document/d/1EkGHMWcz2kRtd3IIM4utHnjsPG_Sf3Z-GzTdCM72bYo/edit?usp=sharing' target='_blank'>privacy policy</a> to see how we protect your information.</p>
           </div>
         </div>
       </div>
