@@ -9,7 +9,7 @@ const chalk = require('chalk');
 const tmi = require("tmi.js");
 const options = {
     options: {
-        debug: true
+        debug: false
     },
     connection: {
         reconnect: true
@@ -18,11 +18,44 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#Gosu"]
+    // channels: ["#hardlydifficult"]
+    channels: ["#reynad27"]
 };
 const client = new tmi.client(options);
 client.connect();
 
+// NOT AVAILABLE IN LARGER CHANNELS
+// TODO: FIND OUT WHAT DEFINES 'LARGER'
+client.on("join", function (channel, username, self) {
+    // console.log('channel:', channel);
+    // console.log('username', username);
+    // console.log('self', self);
+    // console.log('\n\n');
+});
+// Given in batches of 30 seconds each
+
+client.on("part", function (channel, username, self) {
+    // console.log('channel:', channel);
+    // console.log('username', username);
+    // console.log('self', self);
+    // console.log('\n\n');
+});
+
+// TODO: NOT SEEING ANY BANS
+client.on("ban", function (channel, username, reason) {
+    // Do your stuff.
+    console.log('channel:', channel);
+    console.log('username', username);
+    console.log('reason:', reason);
+    console.log('\n\n');
+});
+
+client.on("chat", function (channel, userstate, message, self) {
+    // Don't listen to my own messages..
+    if (self) return;
+    // Do your stuff.
+    console.log(userstate);
+});
 
 // MIDDLEWARE
 app.use(morgan('dev'));
