@@ -6,7 +6,8 @@ const {Point} = require('../../models');
 router.post('/', (req, res) => {
     Point.create({
         username: req.body.username, 
-        joined: req.body.joined, 
+        // joined: req.body.joined, 
+        joined: Date.now()
     })
     .then((pointObj) => {
         res.sendStatus(200);
@@ -25,21 +26,23 @@ router.put('/:username', (req, res) => {
         }, 
         order: '"createdAt" DESC'
     })
-
-    Point.update({
-        parted: req.body.parted
-    }, {
-        where: {
-            username: req.params.username
-        }
-    })
-    .then((updatedCount) => {
-        if (updatedCount[0]) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(204);
-        }
-    })
+    .then((userEntries) => {
+        Point.update({
+            // parted: req.body.parted
+            parted: Date.now()
+        }, {
+            where: {
+                id: userEntries[0].id
+            }
+        })
+        .then((updatedCount) => {
+            if (updatedCount[0]) {
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(204);
+            }
+        })
+    });
 })
 
 module.exports = router;

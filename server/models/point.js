@@ -2,7 +2,8 @@ const {Sequelize, db} = require('./db');
 
 const Point = db.define('point', {
     username: {
-        type: Sequelize.TEXT, 
+        type: Sequelize.STRING, 
+        defaultValue: '', 
         validate: {
             notEmpty: {
                 args: true, 
@@ -12,19 +13,24 @@ const Point = db.define('point', {
     },
     joined: {
         type: Sequelize.DATE, 
-        notEmpty: {
-            args: true, 
-            msg: 'Join date is required.'
+        defaultValue: '', 
+        validate: {
+            notEmpty: {
+                args: true, 
+                msg: 'Join date is required.'
+            }
         }
     }, 
     parted: {
-        type: Sequelize.DATE, 
-        defaultValue: null
+        type: Sequelize.DATE
     }
 }, {
     hooks: {
         beforeValidate: function (model, options) {
-            model.content = model.content || '';
+            // console.log('pre-content:', model.content);
+            // model.content = model.content || '';
+            // console.log('content:', model.content);
+            // console.log('type of content:', typeof model.content);
         }
     }
 });

@@ -18,7 +18,7 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#Gosu"]
+    channels: ["#Syntag"]
 };
 const client = new tmi.client(options);
 client.connect();
@@ -37,6 +37,7 @@ app.use('/public', express.static('browser/public'));
 
 app.use('/', router);
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log( chalk.blue('App is listening on port ' + process.env.PORT || 3000) );
+const port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log( chalk.blue(`App is listening on port ${port}`) );
 });
