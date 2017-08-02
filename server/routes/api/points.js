@@ -4,10 +4,13 @@ const router = express.Router();
 const {Point} = require('../../models');
 
 router.post('/', (req, res) => {
+    console.log('username', req.body.username);
+    console.log('joined', req.body.joined);
+
     Point.create({
         username: req.body.username, 
-        // joined: req.body.joined, 
-        joined: Date.now()
+        joined: req.body.joined, 
+        // joined: Date.now()
     })
     .then((pointObj) => {
         res.sendStatus(200);
