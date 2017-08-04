@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const chalk = require('chalk');
 
 const {Point} = require('../../models');
 
@@ -19,6 +20,9 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:username', (req, res) => {
+    console.log(chalk.red('parted:', req.body.parted));
+    console.log(chalk.red('username:', req.params.username));
+
     Point.findAll({
         where: {
             username: req.params.username
@@ -27,8 +31,8 @@ router.put('/:username', (req, res) => {
     })
     .then((userEntries) => {
         Point.update({
-            // parted: req.body.parted
-            parted: Date.now()
+            parted: req.body.parted
+            // parted: Date.now()
         }, {
             where: {
                 id: userEntries[0].id

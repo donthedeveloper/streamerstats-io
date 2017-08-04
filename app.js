@@ -21,7 +21,7 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#caineatsabe"]
+    channels: ["#starlightskyes"]
 };
 const client = new tmi.client(options);
 // ===
@@ -33,6 +33,8 @@ function getViewers(streamerName) {
         .then((chatters) => {
             const viewers = chatters.data.chatters.viewers;
 
+            console.log(chalk.yellow(viewers.length));
+
             const currentDateTime = Date.now();
 
             viewers.forEach((viewer) => {
@@ -43,8 +45,6 @@ function getViewers(streamerName) {
 
                 submitViewer(viewerPostObj);
             })
-
-            // console.log(viewers);
         })
         .catch((err) => {
             console.error(err.message);
@@ -61,15 +61,43 @@ function submitViewer(viewer) {
         })
 }
 
-getViewers('caineatsabe');
+function updateViewer(viewerObj) {
+    axios.put(`http://localhost:3000/api/points/${viewerObj.username}`, viewerObj)
+        .then((res) => {
+            // console.log(res);
+        })
+        .catch((err) => {
+            console.error(err.message);
+        })
+}
+
+getViewers('starlightskyes');
 // ===
 
 client.connect();
-// TODO:
-    // join event
-        // submitViewer
-    // part event
-        // create new post request to updateViewer
+
+client.on("part", function (channel, username, self) {
+    const viewerObj = {
+        username: username, 
+        parted: Date.now()
+    }
+
+    console.log('Parted:', chalk.blue(username));
+    updateViewer(viewerObj);
+    
+});
+
+client.on("join", function (channel, username, self) {
+    const viewerObj = {
+        username: username, 
+        joined: Date.now()
+    }
+
+    console.log(chalk.yellow(username));
+
+    submitViewer(viewerObj);
+});
+
 
 
 // MIDDLEWARE
