@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 require('dotenv').config();
-const {db, User, Feature, Point} = require('./index');
+const {db, User, Feature, ChannelTime} = require('./index');
 
 const emails = [
     { email: 'don@donthedeveloper.tv' }, 
@@ -12,7 +12,7 @@ const features = [
     { content: 'twitch bot' }
 ];
 
-const points = [
+const channeltime = [
     { 
         username: 'donthedeveloper', 
         joined: Date.now(), 
@@ -35,12 +35,12 @@ db.sync({ force: true })
 })
 .then(() => {
     console.log(chalk.green('Successfully seeded features table.'));
-    return Point.bulkCreate(points, { individualHooks: true });
+    return ChannelTime.bulkCreate(channeltime, { individualHooks: true });
 })
 .then(() => {
-    console.log(chalk.green('Successfully seeded points table.'));
+    console.log(chalk.green('Successfully seeded channeltime table.'));
     return;
 })
 .catch((err) => {
-    console.log(chalk.red('Uh oh, something happened', err.message));
+    console.log(chalk.red(err));
 });

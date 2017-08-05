@@ -21,7 +21,7 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#starlightskyes"]
+    channels: ["#teamtalima"]
 };
 const client = new tmi.client(options);
 // ===
@@ -52,7 +52,7 @@ function getViewers(streamerName) {
 }
 
 function submitViewer(viewer) {
-    axios.post('http://localhost:3000/api/points', viewer)
+    axios.post('http://localhost:3000/api/channeltime', viewer)
         .then((res) => {
             // console.log(res);
         })
@@ -62,7 +62,7 @@ function submitViewer(viewer) {
 }
 
 function updateViewer(viewerObj) {
-    axios.put(`http://localhost:3000/api/points/${viewerObj.username}`, viewerObj)
+    axios.put(`http://localhost:3000/api/channeltime/${viewerObj.username}`, viewerObj)
         .then((res) => {
             // console.log(res);
         })
@@ -71,12 +71,15 @@ function updateViewer(viewerObj) {
         })
 }
 
-getViewers('starlightskyes');
+// getViewers('hardlydifficult');
 // ===
 
 client.connect();
 
 client.on("part", function (channel, username, self) {
+    // Don't listen to my own messages..
+    if (self) return;
+
     const viewerObj = {
         username: username, 
         parted: Date.now()
@@ -88,6 +91,9 @@ client.on("part", function (channel, username, self) {
 });
 
 client.on("join", function (channel, username, self) {
+    // Don't listen to my own messages..
+    if (self) return;
+
     const viewerObj = {
         username: username, 
         joined: Date.now()
@@ -96,6 +102,12 @@ client.on("join", function (channel, username, self) {
     console.log(chalk.yellow(username));
 
     submitViewer(viewerObj);
+});
+
+// triggered when we join a channel
+client.on("roomstate", function (channel, state) {
+    // Do your stuff.
+    console.dir(channel);
 });
 
 

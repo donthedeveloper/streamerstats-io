@@ -1,5 +1,5 @@
 const {Sequelize, db, User} = require('./user');
 const {Feature} = require('./feature');
-const {Point} = require('./point');
+const {ChannelTime} = require('./channeltime');
 
-module.exports = {Sequelize, db, User, Feature, Point};
+module.exports = {Sequelize, db, User, Feature, ChannelTime};

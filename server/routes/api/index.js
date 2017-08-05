@@ -3,10 +3,10 @@ const router = express.Router();
 
 const subscriberApi = require('./subscribers');
 const featureApi = require('./features');
-const pointApi = require('./points');
+const pointApi = require('./channeltime');
 
 router.use('/subscribers', subscriberApi);
 router.use('/features', featureApi);
-router.use('/points', pointApi);
+router.use('/channeltime', pointApi);
 
 module.exports = router;
