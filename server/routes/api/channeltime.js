@@ -20,9 +20,6 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:username', (req, res) => {
-    console.log(chalk.red('parted:', req.body.parted));
-    console.log(chalk.red('username:', req.params.username));
-
     ChannelTime.findAll({
         where: {
             username: req.params.username

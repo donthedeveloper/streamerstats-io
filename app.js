@@ -21,35 +21,16 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#teamtalima"]
+    channels: ["#donthedeveloper"]
 };
 const client = new tmi.client(options);
 // ===
 
 
 // GET VIEWERS ON BOT LOAD AND SUBMIT TO LOCAL DATABASE
-function getViewers(streamerName) {
-    axios.get(`http://tmi.twitch.tv/group/user/${streamerName}/chatters`)
-        .then((chatters) => {
-            const viewers = chatters.data.chatters.viewers;
-
-            console.log(chalk.yellow(viewers.length));
-
-            const currentDateTime = Date.now();
-
-            viewers.forEach((viewer) => {
-                const viewerPostObj = {
-                    username: viewer, 
-                    joined: currentDateTime
-                };
-
-                submitViewer(viewerPostObj);
-            })
-        })
-        .catch((err) => {
-            console.error(err.message);
-        });
-}
+// function getViewers(streamerName) {
+//     return axios.get(`http://tmi.twitch.tv/group/user/${streamerName}/chatters`);
+// }
 
 function submitViewer(viewer) {
     axios.post('http://localhost:3000/api/channeltime', viewer)
@@ -71,7 +52,48 @@ function updateViewer(viewerObj) {
         })
 }
 
-// getViewers('hardlydifficult');
+function updateViewerPoints(pointsObj) {
+    axios.put(`http://localhost:3000/api/points/${pointsObj.username}`, pointsObj)
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.error(err.message);
+        })
+}
+
+function getViewers(streamerName) {
+    // const getViewers = getViewers(streamerName);
+    let viewers;
+    const numOfPoints = 1;
+
+    axios.get(`http://tmi.twitch.tv/group/user/${streamerName}/chatters`)
+        .then((chatters) => {
+            viewers = chatters.data.chatters.viewers;
+            console.log(chalk.yellow(viewers.length));
+
+            // update viewer points
+            if (viewers) {
+                viewers.forEach((viewer) => {
+                    const pointsObj = {
+                        username: viewer, 
+                        points: numOfPoints
+                    };
+
+                    updateViewerPoints(pointsObj);
+                })
+            }
+        })
+        .catch((err) => {
+            console.error(err.message);
+        });
+}
+
+getViewers('donthedeveloper');
+
+setInterval(() => {
+    getViewers('donthedeveloper');
+}, 90000)
 // ===
 
 client.connect();
