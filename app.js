@@ -21,7 +21,7 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#donthedeveloper"]
+    channels: ["#CainEatsAbe"]
 };
 const client = new tmi.client(options);
 // ===
@@ -48,17 +48,43 @@ function updateViewer(viewerObj) {
             // console.log(res);
         })
         .catch((err) => {
-            console.error(err.message);
+            console.error(err);
         })
 }
 
 function updateViewerPoints(pointsObj) {
-    axios.put(`http://localhost:3000/api/points/${pointsObj.username}`, pointsObj)
+    const username = pointsObj.username;
+    const initialPoints = pointsObj.points;
+
+    axios.put(`http://localhost:3000/api/points/${username}`, pointsObj)
         .then((res) => {
-            console.log(res);
+            const prevPoints = res.data.prevPoints;
+            const updatedPoints = res.data.updatedPoints;
+
+            // ALREADY EXISTING USER WAS UPDATED WITH POINTS
+            if (res.status === 200) {
+                console.log('Points ' + 
+                    chalk.green('incremented ') + 
+                    'for ' + 
+                    chalk.magenta(username) + 
+                    '. Was: ' + 
+                    chalk.yellow(prevPoints) + 
+                    '. Now is: ' + 
+                    chalk.green(updatedPoints) + 
+                    '.'
+                );
+            // NEW USER WAS CREATED WITH INITIAL POINTS
+            } else if (res.status === 201) {
+                console.log(
+                    chalk.magenta(username) + 
+                    ' was created, starting with ' + 
+                    chalk.green(updatedPoints) + 
+                    ' point.'
+                );
+            }
         })
         .catch((err) => {
-            console.error(err.message);
+            console.error(err);
         })
 }
 
@@ -67,7 +93,7 @@ function getViewers(streamerName) {
     let viewers;
     const numOfPoints = 1;
 
-    axios.get(`http://tmi.twitch.tv/group/user/${streamerName}/chatters`)
+    axios.get(`http://tmi.twitch.tv/group/user/${streamerName.toLowerCase()}/chatters`)
         .then((chatters) => {
             viewers = chatters.data.chatters.viewers;
             console.log(chalk.yellow(viewers.length));
@@ -77,7 +103,8 @@ function getViewers(streamerName) {
                 viewers.forEach((viewer) => {
                     const pointsObj = {
                         username: viewer, 
-                        points: numOfPoints
+                        points: numOfPoints, 
+                        incrementer: 1
                     };
 
                     updateViewerPoints(pointsObj);
@@ -89,10 +116,10 @@ function getViewers(streamerName) {
         });
 }
 
-getViewers('donthedeveloper');
+getViewers('CainEatsAbe');
 
 setInterval(() => {
-    getViewers('donthedeveloper');
+    getViewers('CainEatsAbe');
 }, 90000)
 // ===
 
@@ -135,7 +162,7 @@ client.on("roomstate", function (channel, state) {
 
 
 // MIDDLEWARE
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
