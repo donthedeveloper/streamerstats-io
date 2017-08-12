@@ -5,21 +5,29 @@ const chalk = require('chalk');
 const {ChannelTime} = require('../../models');
 
 router.post('/', (req, res) => {
+    const username = req.body.username;
+    const joined = req.body.joined;
+
     ChannelTime.create({
-        username: req.body.username, 
-        joined: req.body.joined
+        username, 
+        joined
     })
     .then((channeltimeObj) => {
-        res.sendStatus(200);
+        const updatedJoined = channeltimeObj.get('joined');
+        // const updatedParted = channeltimeObj.get('parted');
+        res.status(200).send({
+            updatedJoined
+        });
     })
     .catch((err) => {
-        res.status(400).send({
-            errorMessage: err.errors[0].message
-        });
+        console.error(chalk.red(err.message));
+        res.sendStatus(500);
     })
 });
 
 router.put('/:username', (req, res) => {
+    const username = req.params.username;
+
     ChannelTime.findAll({
         where: {
             username: req.params.username
@@ -27,23 +35,35 @@ router.put('/:username', (req, res) => {
         order: '"createdAt" DESC'
     })
     .then((userEntries) => {
-        if (userEntries[0]) {
+        // const userAlreadyExists = userEntries[0];
+        const latestUserEntry = userEntries[0];
+
+        // UPDATE USER'S PART
+        if (latestUserEntry) {
             ChannelTime.update({
                 parted: req.body.parted
             }, {
                 where: {
-                    id: userEntries[0].id
+                    id: latestUserEntry.id
                 }
             })
-            .then((updatedCount) => {
-                if (updatedCount[0]) {
-                    res.sendStatus(200);
-                } else {
-                    res.sendStatus(204);
-                }
+            .then((updatedChanneltimeObj) => {
+                const updatedParted = updatedChanneltimeObj.parted;
+
+                res.status(200).send({
+                    parted: updatedParted
+                });
             })
+            .catch((err) => {
+                console.error(chalk.red(err));
+                res.sendStatus(500);
+            });
         }
-    });
+    })
+    .catch((err) => {
+        console.error(chalk.red(err));
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;
