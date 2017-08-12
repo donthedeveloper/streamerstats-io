@@ -7,6 +7,7 @@ require('dotenv').config();
 const chalk = require('chalk');
 const axios = require('axios');
 
+const testUsername = 'quislings';
 
 // IRC
 const tmi = require("tmi.js");
@@ -21,34 +22,29 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#StarlightSkyes"]
+    channels: [`#${testUsername}`]
 };
 const client = new tmi.client(options);
 // ===
 
 
-// GET VIEWERS ON BOT LOAD AND SUBMIT TO LOCAL DATABASE
-// function getViewers(streamerName) {
-//     return axios.get(`http://tmi.twitch.tv/group/user/${streamerName}/chatters`);
-// }
-
 function submitViewer(viewer) {
     axios.post('http://localhost:3000/api/channeltime', viewer)
         .then((res) => {
-            // console.log(res);
+            console.log(res.data);
         })
         .catch((err) => {
-            console.error(err.message);
+            // console.error(chalk.red(err.message));
         })
 }
 
 function updateViewer(viewerObj) {
     axios.put(`http://localhost:3000/api/channeltime/${viewerObj.username}`, viewerObj)
         .then((res) => {
-            // console.log(res);
+            console.log(res.data);
         })
         .catch((err) => {
-            console.error(err);
+            // console.error(chalk.red(err.message));
         })
 }
 
@@ -96,7 +92,6 @@ function getViewers(streamerName) {
     axios.get(`http://tmi.twitch.tv/group/user/${streamerName.toLowerCase()}/chatters`)
         .then((chatters) => {
             viewers = chatters.data.chatters.viewers;
-            console.log(chalk.yellow(viewers.length));
 
             // update viewer points
             if (viewers) {
@@ -116,10 +111,10 @@ function getViewers(streamerName) {
         });
 }
 
-getViewers('StarlightSkyes');
+getViewers(testUsername);
 
 setInterval(() => {
-    getViewers('StarlightSkyes');
+    getViewers(testUsername);
 }, 90000)
 // ===
 
@@ -148,7 +143,7 @@ client.on("join", function (channel, username, self) {
         joined: Date.now()
     }
 
-    console.log(chalk.yellow(username));
+    console.log('Joined:', chalk.yellow(username));
 
     submitViewer(viewerObj);
 });
