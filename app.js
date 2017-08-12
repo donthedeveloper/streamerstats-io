@@ -21,7 +21,7 @@ const options = {
         username: "StreamerStatsBot",
         password: process.env.OAUTH
     },
-    channels: ["#CainEatsAbe"]
+    channels: ["#StarlightSkyes"]
 };
 const client = new tmi.client(options);
 // ===
@@ -116,10 +116,10 @@ function getViewers(streamerName) {
         });
 }
 
-getViewers('CainEatsAbe');
+getViewers('StarlightSkyes');
 
 setInterval(() => {
-    getViewers('CainEatsAbe');
+    getViewers('StarlightSkyes');
 }, 90000)
 // ===
 
