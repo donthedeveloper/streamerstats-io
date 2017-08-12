@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node app.js",
     "postinstall": "webpack",
-    "dev": "nodemon app.js && webpack -w",
+    "dev": "nodemon app.js",
     "webpack": "webpack",
     "webpack-watch": "webpack -w",
     "seed": "node server/models/seed.js"
