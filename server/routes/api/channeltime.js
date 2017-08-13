@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
     .catch((err) => {
         console.error(chalk.red(err.message));
         res.sendStatus(500);
-    })
+    });
 });
 
 router.put('/:username', (req, res) => {
