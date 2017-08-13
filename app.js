@@ -7,13 +7,13 @@ require('dotenv').config();
 const chalk = require('chalk');
 const axios = require('axios');
 
-const testUsername = 'hardlydifficult';
+const testUsername = 'donthedeveloper';
 
 // IRC
 const tmi = require("tmi.js");
 const options = {
     options: {
-        debug: true
+        debug: false
     },
     connection: {
         reconnect: true
@@ -99,6 +99,22 @@ function updateViewer(viewerObj) {
         .catch((err) => {
             // console.error(chalk.red(err.message));
         })
+}
+
+function sayInChat(message) {
+    client.say("donthedeveloper", message);
+}
+
+function getViewerPoints(username) {
+    axios.get(`http://localhost:3000/api/points/${username}`)
+        .then((res) => {
+            const points = res.data.points;
+            const message = `${username} has ${points} point(s).`;
+            sayInChat(message);
+        })
+        .catch((err) => {
+            // console.error(chalk.red(err.message));
+        });
 }
 
 function updateViewerPoints(pointsObj) {
@@ -205,6 +221,35 @@ client.on("join", function (channel, username, self) {
 client.on("roomstate", function (channel, state) {
     // Do your stuff.
     console.dir(channel);
+});
+
+client.on("message", function (channel, userstate, message, self) {
+    // Don't listen to my own messages..
+    if (self) return;
+
+    // Handle different message types..
+    switch(userstate["message-type"]) {
+        case "action":
+            // This is an action message..
+            break;
+        case "chat":
+            // This is a chat message..
+            console.log(message);
+            if (message === '!points') {
+                const username = userstate.username;
+                // const replyMessage = 'I gives you all ze points!';
+                // client.say("donthedeveloper", replyMessage);
+                getViewerPoints(username);
+                // console.log(userstate);
+            }
+            break;
+        case "whisper":
+            // This is a whisper..
+            break;
+        default:
+            // Something else ?
+            break;
+    }
 });
 
 

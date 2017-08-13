@@ -4,6 +4,33 @@ const chalk = require('chalk');
 
 const {Point} = require('../../models');
 
+router.get('/:username', (req, res) => {
+    // console.log(req.params.username);
+    const username = req.params.username.toLowerCase();
+
+    Point.findOne({
+        where: {
+            username
+        }
+    })
+    .then((findResult) => {
+        let points;
+
+        if (findResult) {
+            points = findResult.get('points');;
+        } else {
+            points = 0;
+        }
+        // const points = findResult.get('points') || 0;
+        res.status(200).send({
+            points
+        });
+    })
+    .catch((err) => {
+        console.error(chalk.red(err.message));
+    });
+});
+
 router.put('/:username', (req, res) => {
     const username = req.params.username;
     const incrementer = req.body.incrementer;
