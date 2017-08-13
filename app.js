@@ -7,7 +7,7 @@ require('dotenv').config();
 const chalk = require('chalk');
 const axios = require('axios');
 
-const testUsername = 'donthedeveloper';
+const testUsername = 'hardlydifficult';
 
 // IRC
 const tmi = require("tmi.js");
@@ -28,6 +28,30 @@ const client = new tmi.client(options);
 // ===
 
 
+
+function addLog(eventName) {
+    console.log(eventName);
+    const logObj = {
+        eventName
+    };
+
+    axios.post('http://localhost:3000/api/logs', logObj)
+        .then((res) => {
+            if (res.status === 200) {
+                const addedEventName = res.data.addedEventName;
+                const updatedAt = res.data.updatedAt;
+
+                // console.log(
+                //     'Added event ' + 
+                //     chalk.green(addedEventName) + 
+                //     ' to the logs at ' + 
+                //     chalk.blue(updatedAt) + 
+                //     '.'
+                // );
+            }
+        })
+}
+
 function submitViewer(viewerObj) {
     const username = viewerObj.username;
     const parted = viewerObj.joined;
@@ -37,12 +61,15 @@ function submitViewer(viewerObj) {
             const updatedJoined = res.data.updatedJoined;
 
             if (res.status === 200) {
-                console.log(chalk.magenta(username) + 
+                console.log(
+                    chalk.magenta(username) + 
                     chalk.green(' joined ') + 
                     'the channel at ' + 
                     chalk.green(updatedJoined) + 
                     '.'
                 );
+
+                addLog('joined');
             }
         })
         .catch((err) => {
@@ -58,12 +85,15 @@ function updateViewer(viewerObj) {
             const updatedParted = res.data.updatedParted;
 
             if (res.status === 200) {
-                console.log(chalk.magenta(username) + 
+                console.log(
+                    chalk.magenta(username) + 
                     chalk.yellow(' parted ') + 
                     'the channel at ' + 
                     chalk.yellow(updatedParted) + 
                     '.'
                 );
+
+                addLog('parted');
             }
         })
         .catch((err) => {
@@ -101,6 +131,8 @@ function updateViewerPoints(pointsObj) {
                     ' point.'
                 );
             }
+
+            addLog('incrementedPoints');
         })
         .catch((err) => {
             console.error(err);
@@ -152,7 +184,7 @@ client.on("part", function (channel, username, self) {
         parted: Date.now()
     }
 
-    console.log('Parted:', chalk.blue(username));
+    // console.log('Parted:', chalk.blue(username));
     updateViewer(viewerObj);
     
 });
