@@ -14,7 +14,6 @@ router.post('/', (req, res) => {
     })
     .then((channeltimeObj) => {
         const updatedJoined = channeltimeObj.get('joined');
-        // const updatedParted = channeltimeObj.get('parted');
         res.status(200).send({
             updatedJoined
         });
@@ -35,23 +34,18 @@ router.put('/:username', (req, res) => {
         order: '"createdAt" DESC'
     })
     .then((userEntries) => {
-        // const userAlreadyExists = userEntries[0];
         const latestUserEntry = userEntries[0];
 
         // UPDATE USER'S PART
         if (latestUserEntry) {
-            ChannelTime.update({
+            latestUserEntry.update({
                 parted: req.body.parted
-            }, {
-                where: {
-                    id: latestUserEntry.id
-                }
             })
             .then((updatedChanneltimeObj) => {
                 const updatedParted = updatedChanneltimeObj.parted;
 
                 res.status(200).send({
-                    parted: updatedParted
+                    updatedParted
                 });
             })
             .catch((err) => {

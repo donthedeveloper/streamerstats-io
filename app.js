@@ -7,7 +7,7 @@ require('dotenv').config();
 const chalk = require('chalk');
 const axios = require('axios');
 
-const testUsername = 'quislings';
+const testUsername = 'donthedeveloper';
 
 // IRC
 const tmi = require("tmi.js");
@@ -28,10 +28,22 @@ const client = new tmi.client(options);
 // ===
 
 
-function submitViewer(viewer) {
-    axios.post('http://localhost:3000/api/channeltime', viewer)
+function submitViewer(viewerObj) {
+    const username = viewerObj.username;
+    const parted = viewerObj.joined;
+
+    axios.post('http://localhost:3000/api/channeltime', viewerObj)
         .then((res) => {
-            console.log(res.data);
+            const updatedJoined = res.data.updatedJoined;
+
+            if (res.status === 200) {
+                console.log(chalk.magenta(username) + 
+                    chalk.green(' joined ') + 
+                    'the channel at ' + 
+                    chalk.green(updatedJoined) + 
+                    '.'
+                );
+            }
         })
         .catch((err) => {
             // console.error(chalk.red(err.message));
@@ -39,9 +51,20 @@ function submitViewer(viewer) {
 }
 
 function updateViewer(viewerObj) {
-    axios.put(`http://localhost:3000/api/channeltime/${viewerObj.username}`, viewerObj)
+    const username = viewerObj.username;
+
+    axios.put(`http://localhost:3000/api/channeltime/${username}`, viewerObj)
         .then((res) => {
-            console.log(res.data);
+            const updatedParted = res.data.updatedParted;
+
+            if (res.status === 200) {
+                console.log(chalk.magenta(username) + 
+                    chalk.yellow(' parted ') + 
+                    'the channel at ' + 
+                    chalk.yellow(updatedParted) + 
+                    '.'
+                );
+            }
         })
         .catch((err) => {
             // console.error(chalk.red(err.message));
@@ -142,8 +165,6 @@ client.on("join", function (channel, username, self) {
         username: username, 
         joined: Date.now()
     }
-
-    console.log('Joined:', chalk.yellow(username));
 
     submitViewer(viewerObj);
 });

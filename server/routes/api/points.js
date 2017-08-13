@@ -45,46 +45,11 @@ router.put('/:username', (req, res) => {
                 updatedPoints: 1
             })
         }
-
-                //         console.log('Points ' + 
-                //     chalk.green('incremented ') + 
-                //     'for ' + 
-                //     chalk.magenta(updatedUsername) + 
-                //     '. Was: ' + 
-                //     chalk.yellow(points) + 
-                //     '. Now is: ' + 
-                //     chalk.green(updatedPoints) + 
-                //     '.'
-                // );
     })
     .catch((err) => {
         console.error(err);
     });
 
-    // ChannelTime.findAll({
-    //     where: {
-    //         username: req.params.username
-    //     }, 
-    //     order: '"createdAt" DESC'
-    // })
-    // .then((userEntries) => {
-    //     if (userEntries[0]) {
-    //         ChannelTime.update({
-    //             parted: req.body.parted
-    //         }, {
-    //             where: {
-    //                 id: userEntries[0].id
-    //             }
-    //         })
-    //         .then((updatedCount) => {
-    //             if (updatedCount[0]) {
-    //                 res.sendStatus(200);
-    //             } else {
-    //                 res.sendStatus(204);
-    //             }
-    //         })
-    //     }
-    // });
 })
 
 module.exports = router;
