@@ -7,7 +7,7 @@ require('dotenv').config();
 const chalk = require('chalk');
 const axios = require('axios');
 
-const testUsername = 'donthedeveloper';
+const testUsername = 'toyzruskid';
 
 // IRC
 const tmi = require("tmi.js");
@@ -28,6 +28,34 @@ const client = new tmi.client(options);
 // ===
 
 
+
+function getKrakenChannelData(streamerName) {
+    axios.get(`https://api.twitch.tv/kraken/channels/${streamerName.toLowerCase()}`, {
+        'headers': {
+            'Client-ID': ''
+        }
+    })
+    .then((kraken) => {
+        console.log('kraken:', kraken.data);
+    })
+    .catch((err) => {
+        console.error(err.message);
+    });
+}
+
+function getKrakenStreamData(streamerName) {
+    axios.get(`https://api.twitch.tv/kraken/streams/${streamerName.toLowerCase()}`, {
+        'headers': {
+            'Client-ID': ''
+        }
+    })
+    .then((kraken) => {
+        console.log('kraken:', kraken.data);
+    })
+    .catch((err) => {
+        console.error(err.message);
+    });
+}
 
 function addLog(eventName) {
     console.log(eventName);
@@ -182,14 +210,16 @@ function getViewers(streamerName) {
         });
 }
 
-getViewers(testUsername);
+// getViewers(testUsername);
+// getKrakenChannelData(testUsername);
+getKrakenStreamData(testUsername);
 
-setInterval(() => {
-    getViewers(testUsername);
-}, 90000)
+// setInterval(() => {
+//     getViewers(testUsername);
+// }, 90000)
 // ===
 
-client.connect();
+// client.connect();
 
 client.on("part", function (channel, username, self) {
     // Don't listen to my own messages..
@@ -235,13 +265,9 @@ client.on("message", function (channel, userstate, message, self) {
         case "chat":
             // This is a chat message..
             console.log(message);
-            if (message === '!points') {
-                const username = userstate.username;
-                // const replyMessage = 'I gives you all ze points!';
-                // client.say("donthedeveloper", replyMessage);
-                getViewerPoints(username);
-                // console.log(userstate);
-            }
+            // if (message === '!points') {
+            //     getViewerPoints(username);
+            // }
             break;
         case "whisper":
             // This is a whisper..
